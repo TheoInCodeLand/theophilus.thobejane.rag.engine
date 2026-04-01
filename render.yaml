@@ -2,7 +2,7 @@ services:
   - type: web
     name: theophilus-chatbot-api
     env: python
-    pythonVersion: 3.11.11
+    pythonVersion: 3.11
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
     envVars:
