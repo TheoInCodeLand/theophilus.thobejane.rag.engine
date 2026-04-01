@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: theophilus-chatbot-api
+    env: python
+    pythonVersion: 3.11.11
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.11
+      - key: GROQ_API_KEY
+        sync: false  # Set in Render dashboard
+      - key: PINECONE_API_KEY
+        sync: false
+      - key: PINECONE_INDEX
+        value: web-portfolio
+      - key: PINECONE_NAMESPACE
+        value: portfolio-knowledge
+      - key: DATABASE_URL
+        sync: false
+    healthCheckPath: /health
+    autoDeploy: true
