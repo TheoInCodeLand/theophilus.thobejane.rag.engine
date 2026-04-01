@@ -2,21 +2,29 @@ services:
   - type: web
     name: theophilus-chatbot-api
     env: python
-    plan: free
+    plan: free  # Explicitly sets the $0 free tier
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 2
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.11
       - key: GROQ_API_KEY
-        sync: false  # Set in Render dashboard
+        sync: false
       - key: PINECONE_API_KEY
         sync: false
       - key: PINECONE_INDEX
         value: web-portfolio
       - key: PINECONE_NAMESPACE
         value: portfolio-knowledge
+      - key: PINECONE_ENVIRONMENT
+        value: us-east-1-gcp
+      - key: WEB_APP_URL
+        value: https://theoincodeland-portfolio.vercel.app
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dpdira4rd
+      - key: CLOUDINARY_API_KEY
+        value: "462776747915157"
+      - key: CLOUDINARY_API_SECRET
+        sync: false
       - key: DATABASE_URL
         sync: false
-    healthCheckPath: /health
-    autoDeploy: true
